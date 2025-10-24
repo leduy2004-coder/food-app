@@ -1,7 +1,22 @@
-import type { NextConfig } from "next";
+// import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const withNextIntl = createNextIntlPlugin();
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http" as const,
+        hostname: "localhost",
+        port: "4000",
+        // pathname: '/photos/**'
+      },
+    ],
+  },
+  logging: {
+    fetches: {  
+      fullUrl: true,
+    },
+  },
 };
-
-export default nextConfig;
+export default withNextIntl(nextConfig);

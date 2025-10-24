@@ -1,0 +1,19 @@
+{
+  "NavbarLinks": {
+    "home": "Trang chủ",
+    "homeTitle": "Trang chủ",
+    "about": "Giới thiệu",
+    "aboutTitle": "Trang giới thiệu",
+    "profile": "Hồ sơ",
+    "profileTitle": "Trang hồ sơ"
+  },
+  "HomePage": {
+    "title": "Trang đích"
+  },
+  "AboutPage": {
+    "title": "Giới thiệu"
+  },
+  "ProfilePage": {
+    "title": "Hồ sơ"
+  }
+}
