@@ -28,7 +28,16 @@
     "haveAccount": "Already have an account?",
     "login": "Login"
   },
-  "ProfilePage": {
-    "title": "Profile"
+  "HeroPage": {
+    "altFreshBread": "Fresh Bread",
+    "tagline": "Easy, Fresh & Convenient",
+    "titleLine1": "Stock Up",
+    "titleLine2": "Daily Essentials",
+    "subtitle1": "Save more on",
+    "subtitle2": "Your favorite brands",
+    "ctaButton": "Shop Now",
+    "baguettes": "Baguettes",
+    "roundBread": "Round Bread",
+    "croissant": "Croissant"
   }
 }

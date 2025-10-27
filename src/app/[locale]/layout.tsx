@@ -14,7 +14,7 @@ import "../globals.css";
 
 import { baseOpenGraph } from "@/app/[locale]/shared-metadata";
 import AppProvider from "./app-provider";
-import { HeaderLayout } from "@/components/layouts/header";
+import { HeaderLayout } from "@/layouts/header";
 
 const inter = Inter({ subsets: ["vietnamese"] });
 

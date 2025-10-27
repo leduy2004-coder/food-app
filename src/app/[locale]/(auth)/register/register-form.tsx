@@ -44,12 +44,10 @@ const RegisterForm = () => {
     },
   });
 
-  // ✅ Định nghĩa kiểu onSubmit chính xác
   const onSubmit: SubmitHandler<RegisterBodyType> = async (values) => {
     if (loading) return;
     setLoading(true);
     try {
-      console.log("Register values:", values);
       await authApiRequest.register(values);
 
       toast.success("Đăng ký thành công");

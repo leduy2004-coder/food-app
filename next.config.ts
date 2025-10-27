@@ -9,12 +9,18 @@ const nextConfig = {
         protocol: "http" as const,
         hostname: "localhost",
         port: "4000",
-        // pathname: '/photos/**'
+        pathname: "/**",
+      },
+      {
+        protocol: "https" as const,
+        hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },
   logging: {
-    fetches: {  
+    fetches: {
       fullUrl: true,
     },
   },

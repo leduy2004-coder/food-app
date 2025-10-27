@@ -9,7 +9,7 @@ import {
 import { MessageResType } from "@/schemaValidations/common.schema";
 
 const authApiRequest = {
-  login: (body: LoginBodyType) =>
+  getAllCategoriesAPI: (body: LoginBodyType) =>
     http.post<LoginResType>("/api/v1/auth/auth2/authenticate", body),
   register: (body: RegisterBodyType) =>
     http.post<RegisterResType>("/api/v1/auth/users/register", body),

@@ -27,8 +27,17 @@
     "button": "Đăng ký",
     "haveAccount": "Đã có tài khoản?",
     "login": "Đăng nhập"
-  },  
-  "ProfilePage": {
-    "title": "Hồ sơ"
+  },
+  "HeroPage": {
+    "altFreshBread": "Bánh mì tươi",
+    "tagline": "Dễ dàng, Tươi mới & Tiện lợi",
+    "titleLine1": "Dự trữ",
+    "titleLine2": "Nhu yếu phẩm hằng ngày",
+    "subtitle1": "Tiết kiệm nhiều hơn cho",
+    "subtitle2": "Những thương hiệu bạn yêu thích",
+    "ctaButton": "Mua ngay",
+    "baguettes": "Bánh mỳ Baguette",
+    "roundBread": "Bánh mỳ tròn",
+    "croissant": "Bánh sừng bò"
   }
 }

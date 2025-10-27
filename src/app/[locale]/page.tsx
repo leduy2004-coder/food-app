@@ -1,24 +1,17 @@
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 
+import Box from "@mui/material/Box";
+import HomePage from "@/layouts/home";
 export default function Home() {
   return (
-    <Container maxWidth="lg">
-      <Box
-        sx={{
-          my: 4,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          Material UI - Next.js App Router example in TypeScript
-        </Typography>
-
-      </Box>
-    </Container>
+    <Box
+      sx={{
+        minHeight: "100vh", // full height màn hình
+        width: "100%", // full width
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <HomePage />
+    </Box>
   );
 }
