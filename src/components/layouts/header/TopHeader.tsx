@@ -5,6 +5,7 @@ import { useAppContext as UserAuth } from "@/app/[locale]/app-provider";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
+import ModeSwitch from "@/components/features/mode-switch";
 
 const TopHeader = ({ locale }: { locale: string }) => {
   const t = useTranslations("Header");
@@ -150,6 +151,10 @@ const TopHeader = ({ locale }: { locale: string }) => {
                   VN
                 </option>
               </select>
+            </div>
+
+            <div className="ml-2">
+              <ModeSwitch />
             </div>
           </div>
         </div>
