@@ -12,7 +12,10 @@
   "LoginPage": {
     "title": "Login",
     "button": "Login",
-    "password": "Password"
+    "username": "Username",
+    "password": "Password",
+    "noAccount": "Don't have an account?",
+    "switchToRegister": "Register now"
   },
   "ProfilePage": {
     "title": "Profile"

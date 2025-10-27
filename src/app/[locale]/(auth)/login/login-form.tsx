@@ -4,12 +4,11 @@ import { useForm } from "react-hook-form";
 import { LoginBody, LoginBodyType } from "@/schemaValidations/auth.schema";
 import authApiRequest from "@/apiRequests/auth";
 import { useRouter } from "next/navigation";
-import { handleErrorApi } from "@/lib/utils";
+import { getTokenExpiry, handleErrorApi } from "@/lib/utils";
 import { useState } from "react";
 import { useAppContext } from "@/app/[locale]/app-provider";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-
 
 import {
   Box,
@@ -18,7 +17,9 @@ import {
   TextField,
   Typography,
   Paper,
+  Divider,
 } from "@mui/material";
+
 
 const LoginForm = () => {
   const t = useTranslations("LoginPage");
@@ -29,7 +30,7 @@ const LoginForm = () => {
   const form = useForm<LoginBodyType>({
     resolver: zodResolver(LoginBody),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
@@ -39,15 +40,29 @@ const LoginForm = () => {
     setLoading(true);
     try {
       const result = await authApiRequest.login(values);
+      const token = result.payload.result.access_token;
+      const refreshToken = result.payload.result.refresh_token;
+
+      const expiresAt = getTokenExpiry(token);
 
       await authApiRequest.auth({
-        sessionToken: result.payload.data.token,
-        expiresAt: result.payload.data.expiresAt,
+        sessionToken: token,
+        expiresAt: expiresAt?.toString() || "", 
       });
 
-      toast.success(result.payload.message);
+      localStorage.setItem("token", token);
+      localStorage.setItem("refresh_token", refreshToken);
 
-      setUser(result.payload.data.account);
+      const userObj = {
+        nickName: result.payload.result.nickName,
+        email: result.payload.result.email,
+        id: result.payload.result.id,
+        role: result.payload.result.roles[0].code,
+      };
+
+      toast.success(result.payload.message);
+      setUser(userObj);
+
       router.push("/");
       router.refresh();
     } catch (error: unknown) {
@@ -61,19 +76,38 @@ const LoginForm = () => {
     }
   }
 
+  function onSwitchToRegister(): void {
+    router.push("/register");
+  }
+
   return (
     <Paper
-      elevation={3}
+      elevation={4}
       sx={{
-        p: 4,
-        maxWidth: 500,
+        p: 5,
+        maxWidth: 420,
         width: "100%",
         mx: "auto",
-        mt: 6,
+        mt: 8,
+        borderRadius: 4,
+        backdropFilter: "blur(10px)",
+        background:
+          "linear-gradient(145deg, rgba(255,255,255,0.95), rgba(245,245,245,0.9))",
+        boxShadow: "0 8px 30px rgba(0,0,0,0.1)",
       }}
     >
-      <Typography variant="h5" fontWeight={600} gutterBottom align="center">
-        {t("button")}
+      <Typography
+        variant="h4"
+        fontWeight={700}
+        align="center"
+        gutterBottom
+        sx={{
+          background: "linear-gradient(45deg, #007bff, #00c6ff)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+        }}
+      >
+        {t("title")}
       </Typography>
 
       <Box
@@ -83,21 +117,22 @@ const LoginForm = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: 2,
+          gap: 3,
+          mt: 3,
         }}
       >
-        {/* Email Field */}
+        {/* Username */}
         <TextField
-          label="Email"
-          type="email"
+          label={t("username")}
+          type="text"
           variant="outlined"
           fullWidth
-          {...form.register("email")}
-          error={!!form.formState.errors.email}
-          helperText={form.formState.errors.email?.message}
+          {...form.register("username")}
+          error={!!form.formState.errors.username}
+          helperText={form.formState.errors.username?.message}
         />
 
-        {/* Password Field */}
+        {/* Password */}
         <TextField
           label={t("password")}
           type="password"
@@ -108,20 +143,50 @@ const LoginForm = () => {
           helperText={form.formState.errors.password?.message}
         />
 
+        {/* Submit */}
         <Button
           type="submit"
           variant="contained"
           fullWidth
           disabled={loading}
-          sx={{ mt: 2, py: 1.5 }}
+          sx={{
+            mt: 1,
+            py: 1.3,
+            fontWeight: 600,
+            fontSize: "1rem",
+            borderRadius: 2,
+            background: "linear-gradient(45deg, #007bff, #00c6ff)",
+            "&:hover": {
+              background: "linear-gradient(45deg, #0069d9, #00b4ff)",
+            },
+          }}
         >
           {loading ? (
-            <CircularProgress size={24} color="inherit" />
+            <CircularProgress size={26} color="inherit" />
           ) : (
             t("button")
           )}
         </Button>
       </Box>
+
+      {/* Divider and Switch */}
+      <Divider sx={{ my: 3 }}>Hoặc</Divider>
+
+      <Typography align="center" variant="body2">
+        {t("noAccount")}{" "}
+        <Button
+          variant="text"
+          onClick={onSwitchToRegister}
+          sx={{
+            fontWeight: 600,
+            color: "#007bff",
+            textTransform: "none",
+            "&:hover": { textDecoration: "underline" },
+          }}
+        >
+          {t("switchToRegister")}
+        </Button>
+      </Typography>
     </Paper>
   );
 };

@@ -7,3 +7,11 @@ export const MessageRes = z
   .strict()
 
 export type MessageResType = z.TypeOf<typeof MessageRes>
+
+export const ApiResponse = <T extends z.ZodTypeAny>(schema: T) =>
+  z.object({
+    code: z.number(),
+    result: schema,
+    message: z.string().optional(),
+    status: z.union([z.string(), z.number()]).optional(),
+  });

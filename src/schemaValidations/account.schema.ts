@@ -4,7 +4,6 @@ export const AccountRes = z
   .object({
     data: z.object({
       id: z.string(),
-      name: z.string(),
       email: z.string(),
       nickName: z.string(),
       role: z.string(),
