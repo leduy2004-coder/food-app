@@ -6,19 +6,16 @@ export const RegisterBody = z
     nickName: z.string().trim().min(2).max(256),
     email: z.string().email(),
     password: z.string().min(6).max(100),
-    confirmPassword: z.string().min(6).max(100),
+    status: z.boolean().optional(),
+    roles: z.array(
+    z.object({
+      code: z.string(),
+    })
+  ),
   })
-  .strict()
-  .superRefine(({ confirmPassword, password }, ctx) => {
-    if (confirmPassword !== password) {
-      ctx.addIssue({
-        code: "custom",
-        message: "Mật khẩu không khớp",
-        path: ["confirmPassword"],
-      });
-    }
-  });
-export type RegisterBodyType = z.TypeOf<typeof RegisterBody>;
+  .strict();
+
+export type RegisterBodyType = z.infer<typeof RegisterBody>;
 
 export const UserProfileToken = z.object({
   id: z.string(),
@@ -38,8 +35,8 @@ export type RegisterResType = Promise<z.infer<typeof ApiResponse>>;
 
 export const LoginBody = z
   .object({
-    username: z.string,
-    password: z.string().min(6).max(100),
+    username: z.string(),
+    password: z.string().max(100),
   })
   .strict();
 export type LoginBodyType = z.TypeOf<typeof LoginBody>;

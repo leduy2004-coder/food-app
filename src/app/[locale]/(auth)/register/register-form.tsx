@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import {
   RegisterBody,
   RegisterBodyType,
@@ -12,7 +12,6 @@ import { handleErrorApi } from "@/lib/utils";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-
 import {
   Box,
   Button,
@@ -28,6 +27,7 @@ const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  // ✅ Type-safe form
   const form = useForm<RegisterBodyType>({
     resolver: zodResolver(RegisterBody),
     defaultValues: {
@@ -35,29 +35,32 @@ const RegisterForm = () => {
       username: "",
       nickName: "",
       password: "",
-      confirmPassword: "",
+      status: true,
+      roles: [
+        {
+          code: "USER",
+        },
+      ],
     },
   });
 
-  async function onSubmit(values: RegisterBodyType) {
+  // ✅ Định nghĩa kiểu onSubmit chính xác
+  const onSubmit: SubmitHandler<RegisterBodyType> = async (values) => {
     if (loading) return;
     setLoading(true);
     try {
+      console.log("Register values:", values);
       await authApiRequest.register(values);
 
       toast.success("Đăng ký thành công");
-
       router.push("/login");
     } catch (error: unknown) {
-      handleErrorApi({
-        error,
-        setError: form.setError,
-      });
+      handleErrorApi({ error, setError: form.setError });
       toast.error("Đăng ký thất bại");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <Paper
@@ -78,64 +81,42 @@ const RegisterForm = () => {
         component="form"
         noValidate
         onSubmit={form.handleSubmit(onSubmit)}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-        }}
+        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
       >
-        {/* username */}
         <TextField
           label={t("username")}
-          variant="outlined"
           fullWidth
           {...form.register("username")}
           error={!!form.formState.errors.username}
           helperText={form.formState.errors.username?.message}
         />
 
-        {/* Email */}
         <TextField
           label={t("email")}
           type="email"
-          variant="outlined"
           fullWidth
           {...form.register("email")}
           error={!!form.formState.errors.email}
           helperText={form.formState.errors.email?.message}
         />
 
-        {/* Password */}
         <TextField
           label={t("password")}
           type="password"
-          variant="outlined"
           fullWidth
           {...form.register("password")}
           error={!!form.formState.errors.password}
           helperText={form.formState.errors.password?.message}
         />
 
-        {/* Confirm Password */}
-        <TextField
-          label={t("confirmPassword")}
-          type="password"
-          variant="outlined"
-          fullWidth
-          {...form.register("confirmPassword")}
-          error={!!form.formState.errors.confirmPassword}
-          helperText={form.formState.errors.confirmPassword?.message}
-        />
-        {/* nickname */}
         <TextField
           label={t("nickName")}
-          variant="outlined"
           fullWidth
           {...form.register("nickName")}
           error={!!form.formState.errors.nickName}
           helperText={form.formState.errors.nickName?.message}
         />
-        {/* Submit button */}
+
         <Button
           type="submit"
           variant="contained"
@@ -150,7 +131,6 @@ const RegisterForm = () => {
           )}
         </Button>
 
-        {/* Switch to login */}
         <Typography
           variant="body2"
           align="center"

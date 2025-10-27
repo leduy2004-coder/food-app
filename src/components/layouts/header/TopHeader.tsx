@@ -38,11 +38,11 @@ const TopHeader = ({ locale }: { locale: string }) => {
   };
 
   async function handleLogout(): Promise<void> {
-    await authApiRequest.logoutFromNextClientToNextServer();
+    await authApiRequest.logoutFromNextClientToNextServer(true);
     localStorage.clear();
     setUser(null);
     router.push("/login");
-    toast.success(t("Đăng xuất thành công"));
+    toast.success("Đăng xuất thành công");
   }
 
   return (
@@ -63,13 +63,7 @@ const TopHeader = ({ locale }: { locale: string }) => {
 
         {/* Right side - User Menu */}
         <div ref={menuRef} className="relative">
-          <div className="flex items-center space-x-2">
-            {user && (
-              <span className="text-sm font-medium text-white">
-                {user.nickName}
-              </span>
-            )}
-          </div>
+ 
           <div className="flex items-center space-x-4 relative">
             {/* User Menu */}
             <div ref={menuRef} className="relative">
@@ -77,17 +71,17 @@ const TopHeader = ({ locale }: { locale: string }) => {
                 onClick={() => setShowUserMenu(!showUserMenu)}
                 className="flex items-center space-x-2 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-white/20"
               >
-                <svg
-                  className="h-5 w-5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                  <svg
+                    className="h-5 w-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
                 {user && <span>{user.nickName}</span>}
                 <svg
                   className={`h-4 w-4 transition-transform ${

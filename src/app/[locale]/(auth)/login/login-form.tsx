@@ -43,7 +43,7 @@ const LoginForm = () => {
       const refreshToken = result.payload.result.refresh_token;
 
       const expiresAt = getTokenExpiry(token);
-
+      
       await authApiRequest.auth({
         sessionToken: token,
         expiresAt: expiresAt?.toString() || "",
@@ -117,7 +117,7 @@ const LoginForm = () => {
           mt: 3,
         }}
       >
-        {/* Username */}
+        {/* username */}
         <TextField
           label={t("username")}
           type="text"
