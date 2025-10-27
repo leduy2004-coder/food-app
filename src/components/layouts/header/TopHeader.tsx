@@ -6,10 +6,12 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import ModeSwitch from "@/components/features/mode-switch";
+import authApiRequest from "@/apiRequests/auth";
+import { toast } from "sonner";
 
 const TopHeader = ({ locale }: { locale: string }) => {
   const t = useTranslations("Header");
-  const { user } = UserAuth();
+  const { user, setUser } = UserAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -35,10 +37,12 @@ const TopHeader = ({ locale }: { locale: string }) => {
     router.refresh();
   };
 
-  function handleLogout():
-    | import("react").MouseEventHandler<HTMLButtonElement>
-    | undefined {
-    throw new Error("Function not implemented.");
+  async function handleLogout(): Promise<void> {
+    await authApiRequest.logoutFromNextClientToNextServer();
+    localStorage.clear();
+    setUser(null);
+    router.push("/login");
+    toast.success(t("Đăng xuất thành công"));
   }
 
   return (

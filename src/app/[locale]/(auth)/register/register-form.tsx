@@ -47,7 +47,7 @@ const RegisterForm = () => {
 
       toast.success("Đăng ký thành công");
 
-      router.push("/login"); // ✅ Chuyển sang trang login
+      router.push("/login");
     } catch (error: unknown) {
       handleErrorApi({
         error,

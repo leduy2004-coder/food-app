@@ -4,7 +4,7 @@ import {
   LoginResType,
   RegisterBodyType,
   RegisterResType,
-  // SlideSessionResType
+  SlideSessionResType,
 } from "@/schemaValidations/auth.schema";
 import { MessageResType } from "@/schemaValidations/common.schema";
 
@@ -41,22 +41,22 @@ const authApiRequest = {
         signal,
       }
     ),
-  // slideSessionFromNextServerToServer: (sessionToken: string) =>
-  //   http.post<SlideSessionResType>(
-  //     '/auth/slide-session',
-  //     {},
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${sessionToken}`
-  //       }
-  //     }
-  //   ),
-  // slideSessionFromNextClientToNextServer: () =>
-  //   http.post<SlideSessionResType>(
-  //     '/api/auth/slide-session',
-  //     {},
-  //     { baseUrl: '' }
-  //   )
+  slideSessionFromNextServerToServer: (sessionToken: string) =>
+    http.post<SlideSessionResType>(
+      "/auth/slide-session",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
+        },
+      }
+    ),
+  slideSessionFromNextClientToNextServer: () =>
+    http.post<SlideSessionResType>(
+      "/api/auth/slide-session",
+      {},
+      { baseUrl: "" }
+    ),
 };
 
 export default authApiRequest;
