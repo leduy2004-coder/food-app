@@ -1,17 +1,18 @@
 {
-  "NavbarLinks": {
-    "home": "Home",
-    "homeTitle": "Home page",
-    "about": "About",
-    "aboutTitle": "About page",
+  "Header": {
+    "aboutUs": "About Us",
+    "support": "Customer Support",
+    "downloadApp": "Shop on the go, download our app. Details.",
     "profile": "Profile",
-    "profileTitle": "Profile page"
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register",
+    "searchPlaceholder": "Search products..."
   },
-  "HomePage": {
-    "title": "Landing page"
-  },
-  "AboutPage": {
-    "title": "About"
+  "LoginPage": {
+    "title": "Login",
+    "button": "Login",
+    "password": "Password"
   },
   "ProfilePage": {
     "title": "Profile"

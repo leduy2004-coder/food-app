@@ -1,17 +1,18 @@
 {
-  "NavbarLinks": {
-    "home": "Trang chủ",
-    "homeTitle": "Trang chủ",
-    "about": "Giới thiệu",
-    "aboutTitle": "Trang giới thiệu",
-    "profile": "Hồ sơ",
-    "profileTitle": "Trang hồ sơ"
+  "Header": {
+    "aboutUs": "Về chúng tôi",
+    "support": "Hỗ trợ khách hàng",
+    "downloadApp": "Mua sắm mọi lúc, tải ứng dụng của chúng tôi. Chi tiết.",
+    "profile": "Trang cá nhân",
+    "logout": "Đăng xuất",
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "searchPlaceholder": "Tìm kiếm sản phẩm..."
   },
-  "HomePage": {
-    "title": "Trang đích"
-  },
-  "AboutPage": {
-    "title": "Giới thiệu"
+  "LoginPage": {
+    "title": "Đăng nhập",
+    "button": "Đăng nhập",
+    "password": "Mật khẩu"
   },
   "ProfilePage": {
     "title": "Hồ sơ"
