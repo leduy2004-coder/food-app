@@ -20,7 +20,6 @@ import {
   Divider,
 } from "@mui/material";
 
-
 const LoginForm = () => {
   const t = useTranslations("LoginPage");
   const [loading, setLoading] = useState(false);
@@ -47,7 +46,7 @@ const LoginForm = () => {
 
       await authApiRequest.auth({
         sessionToken: token,
-        expiresAt: expiresAt?.toString() || "", 
+        expiresAt: expiresAt?.toString() || "",
       });
 
       localStorage.setItem("token", token);
@@ -90,10 +89,7 @@ const LoginForm = () => {
         mx: "auto",
         mt: 8,
         borderRadius: 4,
-        backdropFilter: "blur(10px)",
-        background:
-          "linear-gradient(145deg, rgba(255,255,255,0.95), rgba(245,245,245,0.9))",
-        boxShadow: "0 8px 30px rgba(0,0,0,0.1)",
+        backdropFilter: "blur(12px)",
       }}
     >
       <Typography

@@ -2,7 +2,8 @@ import z from "zod";
 import { ApiResponse } from "./common.schema";
 export const RegisterBody = z
   .object({
-    name: z.string().trim().min(2).max(256),
+    username: z.string().trim().min(2).max(256),
+    nickName: z.string().trim().min(2).max(256),
     email: z.string().email(),
     password: z.string().min(6).max(100),
     confirmPassword: z.string().min(6).max(100),
@@ -33,7 +34,7 @@ export const UserProfileToken = z.object({
     })
   ),
 });
-export type RegisterResType = z.TypeOf<typeof UserProfileToken>;
+export type RegisterResType = Promise<z.infer<typeof ApiResponse>>;
 
 export const LoginBody = z
   .object({
@@ -43,7 +44,7 @@ export const LoginBody = z
   .strict();
 export type LoginBodyType = z.TypeOf<typeof LoginBody>;
 
-export const LoginRes = ApiResponse(UserProfileToken);;
+export const LoginRes = ApiResponse(UserProfileToken);
 export type LoginResType = z.TypeOf<typeof LoginRes>;
 
 export const SlideSessionBody = z.object({}).strict();

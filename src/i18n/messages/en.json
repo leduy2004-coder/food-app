@@ -17,6 +17,17 @@
     "noAccount": "Don't have an account?",
     "switchToRegister": "Register now"
   },
+  "RegisterPage": {
+    "title": "Register",
+    "username": "Username",
+    "nickName": "Nickname",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "button": "Register",
+    "haveAccount": "Already have an account?",
+    "login": "Login"
+  },
   "ProfilePage": {
     "title": "Profile"
   }

@@ -1,29 +1,30 @@
-import http from '@/lib/http'
+import http from "@/lib/http";
 import {
   LoginBodyType,
   LoginResType,
   RegisterBodyType,
   RegisterResType,
   // SlideSessionResType
-} from '@/schemaValidations/auth.schema'
-import { MessageResType } from '@/schemaValidations/common.schema'
+} from "@/schemaValidations/auth.schema";
+import { MessageResType } from "@/schemaValidations/common.schema";
 
 const authApiRequest = {
-  login: (body: LoginBodyType) => http.post<LoginResType>('/api/v1/auth/auth2/authenticate', body),
+  login: (body: LoginBodyType) =>
+    http.post<LoginResType>("/api/v1/auth/auth2/authenticate", body),
   register: (body: RegisterBodyType) =>
-    http.post<RegisterResType>('/api/v1/auth/users/register', body),
+    http.post<RegisterResType>("/api/v1/auth/users/register", body),
   auth: (body: { sessionToken: string; expiresAt: string }) =>
-    http.post('/api/auth', body, {
-      baseUrl: ''
+    http.post("/api/auth", body, {
+      baseUrl: "",
     }),
   logoutFromNextServerToServer: (sessionToken: string) =>
     http.post<MessageResType>(
-      '/api/v1/auth/auth/logout',
+      "/api/v1/auth/auth/logout",
       {},
       {
         headers: {
-          Authorization: `Bearer ${sessionToken}`
-        }
+          Authorization: `Bearer ${sessionToken}`,
+        },
       }
     ),
   logoutFromNextClientToNextServer: (
@@ -31,13 +32,13 @@ const authApiRequest = {
     signal?: AbortSignal | undefined
   ) =>
     http.post<MessageResType>(
-      '/api/auth/logout',
+      "/api/auth/logout",
       {
-        force
+        force,
       },
       {
-        baseUrl: '',
-        signal
+        baseUrl: "",
+        signal,
       }
     ),
   // slideSessionFromNextServerToServer: (sessionToken: string) =>
@@ -56,6 +57,6 @@ const authApiRequest = {
   //     {},
   //     { baseUrl: '' }
   //   )
-}
+};
 
-export default authApiRequest
+export default authApiRequest;

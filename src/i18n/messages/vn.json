@@ -17,6 +17,17 @@
     "noAccount": "Chưa có tài khoản?",
     "switchToRegister": "Đăng ký ngay"
   },
+  "RegisterPage": {
+    "title": "Đăng ký",
+    "username": "Tên đăng nhập",
+    "nickName": "Biệt danh",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "button": "Đăng ký",
+    "haveAccount": "Đã có tài khoản?",
+    "login": "Đăng nhập"
+  },  
   "ProfilePage": {
     "title": "Hồ sơ"
   }
