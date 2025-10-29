@@ -23,17 +23,17 @@ const CardCategory = ({ item }: { item: CategoryItemType }) => {
         },
       }}
     >
-      <CardActionArea>
+      <CardActionArea component="div">
         {/* Ảnh danh mục */}
         <CardMedia
           component="img"
           image={item?.img?.url || "/placeholder.jpg"}
           alt={item.name}
           sx={{
-            height: 160, 
+            height: 160,
             display: "block",
-            margin: "0 auto", 
-            objectFit: "cover"
+            margin: "0 auto",
+            objectFit: "cover",
           }}
         />
 

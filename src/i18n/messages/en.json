@@ -39,5 +39,12 @@
     "baguettes": "Baguettes",
     "roundBread": "Round Bread",
     "croissant": "Croissant"
+  },
+  "ProfilePage": {
+    "title": "Profile",
+    "notFound": "User information not found",
+    "nickname": "Nickname",
+    "email": "Email",
+    "heading": "User Profile"
   }
 }

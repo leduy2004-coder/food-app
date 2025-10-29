@@ -14,7 +14,7 @@ const authApiRequest = {
     http.post<LoginRes>("/api/v1/auth/auth2/authenticate", body),
   register: (body: RegisterBodyType) =>
     http.post<RegisterResType>("/api/v1/auth/users/register", body),
-  auth: (body: { sessionToken: string; expiresAt: string }) =>
+  auth: (body: { sessionToken: string; expiresAt: string ; role: string}) =>
     http.post("/api/auth", body, {
       baseUrl: "",
     }),

@@ -39,5 +39,13 @@
     "baguettes": "Bánh mỳ Baguette",
     "roundBread": "Bánh mỳ tròn",
     "croissant": "Bánh sừng bò"
+  },
+  "ProfilePage": {
+    "title": "Hồ sơ cá nhân",
+    "notFound": "Không tìm thấy thông tin người dùng",
+    "nickname": "Biệt danh",
+    "email": "Email",
+    "products": "Sản phẩm của bạn",
+    "heading": "Thông tin cá nhân"
   }
 }

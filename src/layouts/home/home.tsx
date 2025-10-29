@@ -6,7 +6,6 @@ import Link from "next/link";
 import routes from "@/constants/routes";
 const HomePage = () => {
   const { user } = useAppContext();
-  console.log("User in HomePage:", user);
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Banner */}

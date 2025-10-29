@@ -5,22 +5,28 @@ import envConfig from "@/config";
 import { ProfileInfo } from "@/components/profile";
 import Product from "./product/page";
 import { cookies } from "next/headers";
+import { getTranslations } from "next-intl/server";
 
 const getDetail = cache(authApiRequest.getUserFromNextServerToServer);
-
 type Props = {
-  params: Promise<{ userId: string }>;
+  params: Promise<{
+    userId: string;
+    locale: string;
+  }>;
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = props.params;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cookieStore = await cookies();
   const sessionToken = cookieStore.get("sessionToken")?.value;
-  // Lấy thông tin user theo id
-  const { payload } = await getDetail((await params).userId, sessionToken!);
+
+  // Await params để lấy giá trị
+  const resolvedParams = await params;
+  const { userId, locale } = resolvedParams;
+
+  const { payload } = await getDetail(userId, sessionToken!);
   const user = payload.result;
 
-  const url = `${envConfig.NEXT_PUBLIC_URL}/profile/${user.id}`;
+  const url = `${envConfig.NEXT_PUBLIC_URL}/${locale}/profile/${user.id}`;
 
   return {
     title: user.nickName,
@@ -31,7 +37,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       url,
       images: [
         {
-          url: `/placeholder-profile.jpg`, // nếu user có avatar thì thay bằng user.avatar
+          url: `/placeholder-profile.jpg`,
         },
       ],
     },
@@ -41,29 +47,37 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-export default async function ProductDetail(props: Props) {
+export default async function ProductDetail({ params }: Props) {
+  // Await params trước khi sử dụng
+  const resolvedParams = await params;
+  const { userId, locale } = resolvedParams;
+
+  const t = await getTranslations({
+    locale: locale,
+    namespace: "ProfilePage",
+  });
+
   const cookieStore = await cookies();
   const sessionToken = cookieStore.get("sessionToken")?.value;
-  const params = await props.params;
+
   let user = null;
   try {
-    const { payload } = await getDetail(params.userId, sessionToken!);
-
+    const { payload } = await getDetail(userId, sessionToken!);
     user = payload.result;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {}
 
   return (
     <div>
-      {!user && <div>Không tìm thấy sản thông tin</div>}
+      {!user && <div>{t("notFound")}</div>}
       {user && (
         <div className="container mx-auto px-6 py-8">
-          <h1 className="mb-6 text-3xl font-bold text-gray-800">
-            Hồ sơ cá nhân
-          </h1>
+          <h1 className="mb-6 text-3xl font-bold">{t("title")}</h1>
 
           <ProfileInfo
             nickName={user?.nickName || ""}
             email={user?.email || ""}
+            locale={locale}
           />
 
           <Product userId={user.id} />

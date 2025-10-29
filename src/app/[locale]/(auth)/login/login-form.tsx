@@ -47,6 +47,7 @@ const LoginForm = () => {
       await authApiRequest.auth({
         sessionToken: token,
         expiresAt: expiresAt?.toString() || "",
+        role: result.payload.result.roles[0].code,
       });
 
       localStorage.setItem("sessionToken", token);

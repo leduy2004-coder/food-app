@@ -3,7 +3,7 @@ import MainNavbar from "./MainNavbar";
 
 const HeaderLayout = ({ locale }: { locale: string }) => {
   return (
-    <header className="relative">
+    <header className="relative" suppressHydrationWarning>
       <TopHeader locale={locale} />
       <MainNavbar />
     </header>

@@ -10,15 +10,14 @@ export default async function Category() {
   let categories: CategoriesResType = [];
   try {
     const { payload } = await getDetail();
-
     categories = payload.result;
   } catch (error) {}
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-6xl mx-auto px-4 py-8 space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold text-gray-800">Loại</h2>
-        <Link href="/admin/profile/category/add">
+        <Link href="/admin/category/add">
           <Button variant="contained" color="primary">
             + Thêm loại
           </Button>
