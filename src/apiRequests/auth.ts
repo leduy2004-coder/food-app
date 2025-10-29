@@ -1,21 +1,29 @@
 import http from "@/lib/http";
+
 import {
   LoginBodyType,
-  LoginResType,
+  LoginRes,
   RegisterBodyType,
   RegisterResType,
-  SlideSessionResType,
+  UserProfileType,
+  UserResType,
 } from "@/schemaValidations/auth.schema";
 import { MessageResType } from "@/schemaValidations/common.schema";
 
 const authApiRequest = {
-  getAllCategoriesAPI: (body: LoginBodyType) =>
-    http.post<LoginResType>("/api/v1/auth/auth2/authenticate", body),
+  login: (body: LoginBodyType) =>
+    http.post<LoginRes>("/api/v1/auth/auth2/authenticate", body),
   register: (body: RegisterBodyType) =>
     http.post<RegisterResType>("/api/v1/auth/users/register", body),
   auth: (body: { sessionToken: string; expiresAt: string }) =>
     http.post("/api/auth", body, {
       baseUrl: "",
+    }),
+  getUserFromNextServerToServer: (id: string, sessionToken: string) =>
+    http.get<UserResType>(`/api/v1/auth/users/get-user?id=${id}`, {
+      headers: {
+          Authorization: `Bearer ${sessionToken}`,
+        },
     }),
   logoutFromNextServerToServer: (sessionToken: string) =>
     http.post<MessageResType>(
@@ -41,22 +49,22 @@ const authApiRequest = {
         signal,
       }
     ),
-  slideSessionFromNextServerToServer: (sessionToken: string) =>
-    http.post<SlideSessionResType>(
-      "/auth/slide-session",
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${sessionToken}`,
-        },
-      }
-    ),
-  slideSessionFromNextClientToNextServer: () =>
-    http.post<SlideSessionResType>(
-      "/api/auth/slide-session",
-      {},
-      { baseUrl: "" }
-    ),
+  // slideSessionFromNextServerToServer: (sessionToken: string) =>
+  //   http.post<SlideSessionResType>(
+  //     "/auth/slide-session",
+  //     {},
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${sessionToken}`,
+  //       },
+  //     }
+  //   ),
+  // slideSessionFromNextClientToNextServer: () =>
+  //   http.post<SlideSessionResType>(
+  //     "/api/auth/slide-session",
+  //     {},
+  //     { baseUrl: "" }
+  //   ),
 };
 
 export default authApiRequest;

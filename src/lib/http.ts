@@ -1,5 +1,5 @@
 import envConfig from "@/config";
-import { normalizePath } from "@/lib/utils";
+import { getTokenExpiry, normalizePath } from "@/lib/utils";
 import { LoginResType } from "@/schemaValidations/auth.schema";
 import { redirect } from "next/navigation";
 
@@ -58,7 +58,7 @@ let clientLogoutRequest: null | Promise<Response> = null;
 export const isClient = () => typeof window !== "undefined";
 
 const request = async <Response>(
-  method: "GET" | "POST" | "PUT" | "DELETE",
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH",
   url: string,
   options?: CustomOptions | undefined
 ) => {
@@ -82,6 +82,8 @@ const request = async <Response>(
       baseHeaders.Authorization = `Bearer ${sessionToken}`;
     }
   }
+  // Nếu không truyền baseUrl (hoặc baseUrl = undefined) thì lấy từ envConfig.NEXT_PUBLIC_API_ENDPOINT
+  // Nếu truyền baseUrl thì lấy giá trị truyền vào, truyền vào '' thì đồng nghĩa với việc chúng ta gọi API đến Next.js Server
 
   const baseUrl =
     options?.baseUrl === undefined
@@ -152,22 +154,6 @@ const request = async <Response>(
       );
     }
   }
-
-  // Đảm bảo logic dưới đây chỉ chạy ở phía client (browser)
-  if (isClient()) {
-    if (
-      ["auth/login", "auth/register"].some(
-        (item) => item === normalizePath(url)
-      )
-    ) {
-      const { token, expiresAt } = (payload as LoginResType).data;
-      localStorage.setItem("sessionToken", token);
-      localStorage.setItem("sessionTokenExpiresAt", expiresAt);
-    } else if ("auth/logout" === normalizePath(url)) {
-      localStorage.removeItem("sessionToken");
-      localStorage.removeItem("sessionTokenExpiresAt");
-    }
-  }
   return data;
 };
 
@@ -191,6 +177,13 @@ const http = {
     options?: Omit<CustomOptions, "body"> | undefined
   ) {
     return request<Response>("PUT", url, { ...options, body });
+  },
+  patch<Response>(
+    url: string,
+    body?: BodyInit | Record<string, unknown> | null,
+    options?: Omit<CustomOptions, "body"> | undefined
+  ) {
+    return request<Response>("PATCH", url, { ...options, body });
   },
   delete<Response>(
     url: string,

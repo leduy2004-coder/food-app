@@ -1,10 +1,7 @@
 import * as React from "react";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
-import theme from "@/theme";
 
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -13,8 +10,9 @@ import { notFound } from "next/navigation";
 import "../globals.css";
 
 import { baseOpenGraph } from "@/app/[locale]/shared-metadata";
-import AppProvider from "./app-provider";
 import { HeaderLayout } from "@/layouts/header";
+import ThemeProviderClient from "./theme-provider";
+import AppProvider from "./app-provider";
 
 const inter = Inter({ subsets: ["vietnamese"] });
 
@@ -46,19 +44,16 @@ export default async function RootLayout(props: {
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-
         <InitColorSchemeScript attribute="class" />
       </head>
       <body className={inter.className}>
-
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <MuiThemeProvider theme={theme}>
-            <CssBaseline />
+          <ThemeProviderClient>
             <AppProvider>
               <HeaderLayout locale={locale} />
               {props.children}
             </AppProvider>
-          </MuiThemeProvider>
+          </ThemeProviderClient>
         </NextIntlClientProvider>
       </body>
     </html>

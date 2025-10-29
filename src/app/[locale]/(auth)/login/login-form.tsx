@@ -39,27 +39,28 @@ const LoginForm = () => {
     setLoading(true);
     try {
       const result = await authApiRequest.login(values);
+
       const token = result.payload.result.access_token;
-      const refreshToken = result.payload.result.refresh_token;
 
       const expiresAt = getTokenExpiry(token);
-      
+
       await authApiRequest.auth({
         sessionToken: token,
         expiresAt: expiresAt?.toString() || "",
       });
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("refresh_token", refreshToken);
+      localStorage.setItem("sessionToken", token);
+      localStorage.setItem("sessionTokenExpiresAt", String(expiresAt));
 
       const userObj = {
         nickName: result.payload.result.nickName,
         email: result.payload.result.email,
         id: result.payload.result.id,
-        role: result.payload.result.roles[0].code,
+        roles: result.payload.result.roles,
       };
 
       toast.success(result.payload.message);
+
       setUser(userObj);
 
       router.push("/");

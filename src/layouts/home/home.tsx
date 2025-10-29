@@ -2,7 +2,7 @@
 import Category from "@/components/category";
 import { Hero } from "@/components/hero";
 import {useAppContext} from "@/app/[locale]/app-provider"
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import routes from "@/constants/routes";
 const HomePage = () => {
   const { user } = useAppContext();
@@ -17,9 +17,9 @@ const HomePage = () => {
       <section className="container mx-auto px-6 py-12">
         <h2 className="mb-6 text-2xl font-bold text-gray-800">Loại</h2>
         <div className="mb-4 text-gray-600">
-          {user?.role === "ADMIN" && (
+          {user?.roles[0].code === "ADMIN" && (
             <button className="mt-6 rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow transition-colors hover:bg-red-700">
-              <Link to={routes.admin_category}>Quản lý loại</Link>
+              <Link href={routes.admin_category}>Quản lý loại</Link>
             </button>
           )}
         </div>

@@ -1,11 +1,11 @@
 "use client";
 import { isClient } from "@/lib/http";
-import { UserProfile } from "@/schemaValidations/auth.schema";
+import { UserProfileType } from "@/schemaValidations/auth.schema";
 import { createContext, useCallback, useContext, useState } from "react";
 
 const AppContext = createContext<{
-  user: UserProfile | null;
-  setUser: (user: UserProfile | null) => void;
+  user: UserProfileType | null;
+  setUser: (user: UserProfileType | null) => void;
   isAuthenticated: boolean;
 }>({
   user: null,
@@ -21,7 +21,7 @@ export default function AppProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUserState] = useState<UserProfile | null>(() => {
+  const [user, setUserState] = useState<UserProfileType | null>(() => {
     if (isClient()) {
       const _user = localStorage.getItem("user");
       return _user ? JSON.parse(_user) : null;
@@ -30,7 +30,7 @@ export default function AppProvider({
   });
   const isAuthenticated = Boolean(user);
   const setUser = useCallback(
-    (user: UserProfile | null) => {
+    (user: UserProfileType | null) => {
       setUserState(user);
       localStorage.setItem("user", JSON.stringify(user));
     },

@@ -1,17 +1,31 @@
-'use client';
-import { createTheme } from '@mui/material/styles';
-import { Roboto } from 'next/font/google';
+import { cyan, deepOrange, orange, teal } from "@mui/material/colors";
+
+import { createTheme } from "@mui/material/styles";
+import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin'],
-  display: 'swap',
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const theme = createTheme({
-  colorSchemes: { light: true, dark: true },
+  colorSchemes: {
+    light: {
+      palette: {
+        primary: teal,
+        secondary: deepOrange,
+      },
+    },
+    dark: {
+      palette: {
+        primary: cyan,
+        secondary: orange,
+      },
+    },
+  },
   cssVariables: {
-    colorSchemeSelector: 'class',
+    colorSchemeSelector: "class",
   },
   typography: {
     fontFamily: roboto.style.fontFamily,
@@ -22,9 +36,9 @@ const theme = createTheme({
         root: {
           variants: [
             {
-              props: { severity: 'info' },
+              props: { severity: "info" },
               style: {
-                backgroundColor: '#60a5fa',
+                backgroundColor: "#60a5fa",
               },
             },
           ],

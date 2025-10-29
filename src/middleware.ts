@@ -50,6 +50,7 @@ export const config = {
     "/me",
     "/login",
     "/register",
+    "/profile/:path*",
     "/products/:path*",
   ],
 };
