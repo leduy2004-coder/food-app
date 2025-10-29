@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import {
   Button,
   Dialog,
@@ -32,7 +32,9 @@ export default function DeleteProduct({
       const result = await productApiRequest.delete(product.id);
       toast.success(result.payload.message);
       setOpen(false);
-      router.refresh();
+      startTransition(() => {
+        router.refresh();
+      });
     } catch (error) {
       handleErrorApi({ error });
     }

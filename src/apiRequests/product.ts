@@ -4,6 +4,7 @@ import {
   CloudinaryListRes,
   CreateProductBodyType,
   ProductListResType,
+  ProductResApiType,
   ProductResType,
   UpdateProductBodyType,
   UpdateProductImageBodyType,
@@ -15,7 +16,7 @@ const productApiRequest = {
       `/api/v1/product/get-products-by-user/${userId}`
     ),
   getDetail: (productId: string) =>
-    http.get<ProductResType>(`/api/v1/product/get-detail-product/${productId}`),
+    http.get<ProductResApiType>(`/api/v1/product/get-detail-product/${productId}`),
 
   create: (body: CreateProductBodyType, files?: File[]) => {
     const formData = new FormData();

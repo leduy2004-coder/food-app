@@ -12,13 +12,19 @@ const Image = forwardRef<HTMLImageElement, CustomImageProps>(
   ({ src, alt, className, fallback = images.noImage, ...props }, ref) => {
     const [imgSrc, setImgSrc] = useState(src);
 
+    // Kiểm tra xem người dùng có truyền width/height không
+    const hasSize =
+      typeof props.width !== "undefined" || typeof props.height !== "undefined";
+
     return (
       <NextImage
         ref={ref}
         src={imgSrc || fallback}
         alt={alt || "image"}
-        className={classNames(styles.wrapper, className)}
         onError={() => setImgSrc(fallback)}
+        className={classNames(styles.wrapper, className, "object-cover")}
+        // Chỉ thêm fill nếu người dùng không truyền width/height
+        {...(!hasSize ? { fill: true } : {})}
         {...props}
       />
     );

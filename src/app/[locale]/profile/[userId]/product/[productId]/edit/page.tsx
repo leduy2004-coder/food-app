@@ -14,7 +14,7 @@ type Props = {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const { payload } = await getDetail(params.productId);
-  const product = payload;
+  const product = payload.result;
   return {
     title: "Edit sản phẩm: " + product.name,
     description: product.description,
@@ -26,7 +26,7 @@ export default async function ProductEdit(props: Props) {
   let product = null;
   try {
     const { payload } = await getDetail(params.productId);
-    product = payload;
+    product = payload.result;
   } catch (error) {}
 
   return (

@@ -13,7 +13,7 @@ const ProductCard = ({ product, userId }: Props) => {
   return (
     <article className="rounded-lg border border-gray-200 p-4">
       <Image
-        src={product?.imgUrl?.url}
+        src={product?.imgUrl[0]?.url}
         alt={product.name}
         className="mb-3 h-40 w-full rounded-md"
       />
