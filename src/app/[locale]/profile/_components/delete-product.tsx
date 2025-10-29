@@ -18,11 +18,12 @@ import { handleErrorApi } from "@/lib/utils";
 
 export default function DeleteProduct({
   product,
+  onDeleteSuccess,
 }: {
   product: ProductResType;
+  onDeleteSuccess?: (productId: string) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -32,9 +33,9 @@ export default function DeleteProduct({
       const result = await productApiRequest.delete(product.id);
       toast.success(result.payload.message);
       setOpen(false);
-      startTransition(() => {
-        router.refresh();
-      });
+      if (onDeleteSuccess) {
+        onDeleteSuccess(product.id);
+      }
     } catch (error) {
       handleErrorApi({ error });
     }

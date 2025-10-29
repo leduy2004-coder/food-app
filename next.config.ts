@@ -18,10 +18,10 @@ const nextConfig = {
         pathname: "/**",
       },
       {
-        protocol: "http",
+        protocol: "http" as const,
         hostname: "localhost",
         port: "9000",
-        pathname: "/resources/**", // đường dẫn ảnh trong MinIO
+        pathname: "/resources/**",
       },
     ],
   },

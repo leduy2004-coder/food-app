@@ -18,12 +18,11 @@ const Image = forwardRef<HTMLImageElement, CustomImageProps>(
 
     return (
       <NextImage
-        ref={ref}
+        className={classNames(styles.wrapper, className, "object-cover")}
+        unoptimized
         src={imgSrc || fallback}
         alt={alt || "image"}
         onError={() => setImgSrc(fallback)}
-        className={classNames(styles.wrapper, className, "object-cover")}
-        // Chỉ thêm fill nếu người dùng không truyền width/height
         {...(!hasSize ? { fill: true } : {})}
         {...props}
       />

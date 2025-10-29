@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import productApiRequest from "@/apiRequests/product";
 import { ProductResType } from "@/schemaValidations/product.schema";
 
@@ -18,7 +18,6 @@ const Product = ({ userId }: Props) => {
       try {
         setIsLoading(true);
         const { payload } = await productApiRequest.getListByUser(userId);
-        console.log(payload)
         setProducts(payload.result.data);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách sản phẩm:", error);
@@ -29,7 +28,9 @@ const Product = ({ userId }: Props) => {
 
     getAllProduct();
   }, []);
-
+  const handleDeleteProduct = (productId: string) => {
+    setProducts((prev) => prev.filter((p) => p.id !== productId));
+  };
   return (
     <section className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
@@ -43,7 +44,12 @@ const Product = ({ userId }: Props) => {
         <>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} userId={userId} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                userId={userId}
+                onDelete={handleDeleteProduct}
+              />
             ))}
           </div>
 

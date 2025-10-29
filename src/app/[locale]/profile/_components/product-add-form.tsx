@@ -22,9 +22,10 @@ import {
 } from "@/schemaValidations/product.schema";
 import productApiRequest from "@/apiRequests/product";
 import categoryApiRequest from "@/apiRequests/category";
-import Image from "next/image";
+
 import { CategoryItemType } from "@/schemaValidations/category.schema";
 import { useAppContext as UserAuth } from "@/app/[locale]/app-provider";
+import Image from "@/components/image";
 
 type Props = {
   product?: ProductResType;
@@ -35,11 +36,11 @@ const ProductAddForm = ({ product }: Props) => {
   const { user } = UserAuth();
   const isEdit = !!product?.id;
   const [file, setFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string>(product?.imgUrl?.url ?? "");
+  const [preview, setPreview] = useState<string>(product?.imgUrl[0]?.url ?? "");
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState<CategoryItemType[]>([]);
-
+  console.log(product);
   const {
     control,
     handleSubmit,
@@ -72,6 +73,7 @@ const ProductAddForm = ({ product }: Props) => {
 
   // Reset form khi product thay đổi
   useEffect(() => {
+    console.log(product);
     if (product) {
       reset({
         name: product.name,
@@ -79,7 +81,7 @@ const ProductAddForm = ({ product }: Props) => {
         description: product.description ?? "",
         categoryId: product.categoryId ?? "",
       });
-      setPreview(product.imgUrl?.url ?? "");
+      setPreview(product.imgUrl[0]?.url ?? "");
       setFile(null);
     }
   }, [product, reset]);
@@ -153,7 +155,7 @@ const ProductAddForm = ({ product }: Props) => {
       setLoading(false);
     }
   };
-
+  console.log("testtttt");
   return (
     <Box sx={{ maxWidth: 800, mx: "auto", p: 3 }}>
       <Paper elevation={2} sx={{ p: 4, borderRadius: 2 }}>
@@ -279,12 +281,7 @@ const ProductAddForm = ({ product }: Props) => {
                     borderColor: "divider",
                   }}
                 >
-                  <Image
-                    src={preview}
-                    fill
-                    alt="Preview"
-                    style={{ objectFit: "cover" }}
-                  />
+                  <Image src={preview} fill alt="Preview" loading="eager" />
                 </Box>
                 <Button
                   variant="outlined"

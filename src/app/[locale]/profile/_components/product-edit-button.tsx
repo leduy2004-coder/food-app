@@ -13,7 +13,7 @@ export default function ProductEditButton({ product, userId }: Props) {
   const isAuthenticated =
     typeof window !== "undefined" &&
     Boolean(localStorage.getItem("sessionToken"));
-
+  console.log(`/profile/${userId}/product/${product.id}/edit`)
   if (!isAuthenticated) return null;
 
   return (

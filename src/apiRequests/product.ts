@@ -15,8 +15,15 @@ const productApiRequest = {
     http.get<ProductListResType>(
       `/api/v1/product/get-products-by-user/${userId}`
     ),
-  getDetail: (productId: string) =>
-    http.get<ProductResApiType>(`/api/v1/product/get-detail-product/${productId}`),
+  getDetailFromNextServerToServer: (productId: string, sessionToken: string) =>
+    http.get<ProductResApiType>(
+      `/api/v1/product/${productId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
+        },
+      }
+    ),
 
   create: (body: CreateProductBodyType, files?: File[]) => {
     const formData = new FormData();

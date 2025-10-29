@@ -1,5 +1,4 @@
 export async function POST(request: Request) {
-  console.log("chay")
   const body = await request.json()
   const sessionToken = body.sessionToken as string
   const expiresAt = body.expiresAt as string

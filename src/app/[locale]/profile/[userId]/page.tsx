@@ -46,7 +46,6 @@ export default async function ProductDetail(props: Props) {
   const sessionToken = cookieStore.get("sessionToken")?.value;
   const params = await props.params;
   let user = null;
-  console.log(sessionToken);
   try {
     const { payload } = await getDetail(params.userId, sessionToken!);
 

@@ -5,7 +5,6 @@ import {
   LoginRes,
   RegisterBodyType,
   RegisterResType,
-  UserProfileType,
   UserResType,
 } from "@/schemaValidations/auth.schema";
 import { MessageResType } from "@/schemaValidations/common.schema";
