@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardMedia, Typography, Box } from "@mui/material";
+import { Card, CardContent, CardMedia, Typography} from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { CategoryItemType } from "@/schemaValidations/category.schema";
 import Image from "@/components/image";

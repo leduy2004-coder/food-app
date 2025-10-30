@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Productic",
     default: "Productic",
   },
-  description: "Được tạo bởi Được dev",
+  description: "Được tạo bởi LD",
   openGraph: baseOpenGraph,
 };
 
@@ -37,6 +37,7 @@ export default async function RootLayout(props: {
   let messages;
   try {
     messages = await getMessages({ locale });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     notFound();
   }
