@@ -48,22 +48,6 @@ const authApiRequest = {
         signal,
       }
     ),
-  // slideSessionFromNextServerToServer: (sessionToken: string) =>
-  //   http.post<SlideSessionResType>(
-  //     "/auth/slide-session",
-  //     {},
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${sessionToken}`,
-  //       },
-  //     }
-  //   ),
-  // slideSessionFromNextClientToNextServer: () =>
-  //   http.post<SlideSessionResType>(
-  //     "/api/auth/slide-session",
-  //     {},
-  //     { baseUrl: "" }
-  //   ),
 };
 
 export default authApiRequest;

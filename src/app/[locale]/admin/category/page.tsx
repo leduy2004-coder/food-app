@@ -11,6 +11,7 @@ export default async function Category() {
   try {
     const { payload } = await getDetail();
     categories = payload.result;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {}
 
   return (
