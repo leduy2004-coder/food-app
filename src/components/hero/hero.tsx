@@ -15,7 +15,7 @@ export const Hero = () => {
 
   if (!isMounted) {
     return (
-      <section className="relative bg-gradient-to-br from-purple-100 to-orange-100 py-16 px-4">
+      <section className="relative bg-linear-to-br from-purple-100 to-orange-100 py-16 px-4">
         <div className="container mx-auto">
           <div className="grid lg:grid-cols-3 gap-8 items-center min-h-[400px]">
             {/* Loading skeleton */}
@@ -26,7 +26,7 @@ export const Hero = () => {
   }
 
   return (
-    <section className="relative bg-gradient-to-br from-purple-100 to-orange-100 py-16 px-4">
+    <section className="relative bg-linear-to-br from-purple-100 to-orange-100 py-16 px-4">
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-3 gap-8 items-center">
           {/* Left side - Bread image */}

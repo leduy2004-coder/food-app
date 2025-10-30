@@ -44,7 +44,7 @@ const HomePage = () => {
             {[1, 2, 3].map((card) => (
               <div
                 key={card}
-                className="rounded-2xl border border-gray-200 bg-gradient-to-br from-red-50 to-orange-50 p-6 shadow-sm"
+                className="rounded-2xl border border-gray-200 bg-linear-to-br from-red-50 to-orange-50 p-6 shadow-sm"
               >
                 <h3 className="mb-2 text-lg font-bold text-gray-800">
                   Special Offer
