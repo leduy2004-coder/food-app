@@ -6,8 +6,12 @@ import { handleErrorApi } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { Button, CircularProgress } from "@mui/material";
 import { useState } from "react";
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export default function ButtonLogout() {
+  const t = useTranslations("Header");
+
   const { setUser } = useAppContext();
   const router = useRouter();
   const pathname = usePathname();
@@ -31,6 +35,7 @@ export default function ButtonLogout() {
       localStorage.removeItem("sessionToken");
       localStorage.removeItem("sessionTokenExpiresAt");
       setLoading(false);
+      toast.success("Đăng xuất thành công");
     }
   };
 
@@ -47,7 +52,7 @@ export default function ButtonLogout() {
         fontWeight: 500,
       }}
     >
-      {loading ? <CircularProgress size={18} color="inherit" /> : "Đăng xuất"}
+      {loading ? <CircularProgress size={18} color="inherit" /> : t("logout")}
     </Button>
   );
 }

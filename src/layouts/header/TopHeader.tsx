@@ -6,12 +6,11 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import ModeSwitch from "@/components/features/mode-switch";
-import authApiRequest from "@/apiRequests/auth";
-import { toast } from "sonner";
+import ButtonLogout from "@/components/features/button-logout";
 
 const TopHeader = ({ locale }: { locale: string }) => {
   const t = useTranslations("Header");
-  const { user, setUser } = UserAuth();
+  const { user } = UserAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -42,17 +41,6 @@ const TopHeader = ({ locale }: { locale: string }) => {
     router.replace(target);
     router.refresh();
   };
-
-  async function handleLogout(): Promise<void> {
-    await authApiRequest.logoutFromNextClientToNextServer(true);
-    setUser(null);
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("sessionToken");
-      localStorage.removeItem("sessionTokenExpiresAt");
-    }
-    router.push("/login");
-    toast.success("Đăng xuất thành công");
-  }
 
   return (
     <div className="bg-[rgb(206,196,43)] px-4 py-2 text-white">
@@ -112,12 +100,7 @@ const TopHeader = ({ locale }: { locale: string }) => {
                     >
                       {t("profile")}
                     </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      {t("logout")}
-                    </button>
+                    <ButtonLogout />
                   </>
                 ) : (
                   <>

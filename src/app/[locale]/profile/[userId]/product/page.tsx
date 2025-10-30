@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ProductAddButton from "../../_components/product-add-button";
 import ProductCard from "../../_components/product-card";
 import { Box, CircularProgress } from "@mui/material";
-import SimplePagination from "@/components/pagination/pagination";
+import { Pagination } from "@/components/pagination";
 
 type Props = {
   userId: string;
@@ -88,7 +88,7 @@ const Product = ({ userId }: Props) => {
             ))}
           </div>
 
-          <SimplePagination
+          <Pagination
             currentPage={page}
             totalPages={totalPages}
             totalItems={totalElements}
