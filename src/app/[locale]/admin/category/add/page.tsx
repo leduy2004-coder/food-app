@@ -61,7 +61,6 @@ export default function AddCategoryPage() {
         <CardContent>
           <form onSubmit={handleSubmit}>
             <Stack spacing={3}>
-              {/* Tên danh mục */}
               <TextField
                 label="Tên danh mục"
                 value={name}

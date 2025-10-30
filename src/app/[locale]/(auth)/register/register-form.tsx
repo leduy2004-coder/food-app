@@ -27,7 +27,6 @@ const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // ✅ Type-safe form
   const form = useForm<RegisterBodyType>({
     resolver: zodResolver(RegisterBody),
     defaultValues: {

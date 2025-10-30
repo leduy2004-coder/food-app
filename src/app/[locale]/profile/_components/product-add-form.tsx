@@ -40,7 +40,6 @@ const ProductAddForm = ({ product }: Props) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState<CategoryItemType[]>([]);
-  console.log(product);
   const {
     control,
     handleSubmit,
