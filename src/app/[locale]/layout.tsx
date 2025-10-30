@@ -13,6 +13,7 @@ import { baseOpenGraph } from "@/app/[locale]/shared-metadata";
 import { HeaderLayout } from "@/layouts/header";
 import ThemeProviderClient from "./theme-provider";
 import AppProvider from "./app-provider";
+import { Toaster } from "sonner"; 
 
 const inter = Inter({ subsets: ["vietnamese"] });
 
@@ -53,6 +54,13 @@ export default async function RootLayout(props: {
             <AppProvider>
               <HeaderLayout locale={locale} />
               {props.children}
+
+              <Toaster 
+                position="top-right"
+                richColors
+                closeButton
+                expand={false}
+              />
             </AppProvider>
           </ThemeProviderClient>
         </NextIntlClientProvider>
