@@ -38,7 +38,7 @@ export default async function RootLayout(props: {
   try {
     messages = await getMessages({ locale });
   } catch (error) {
-    notFound(); // fallback nếu locale không tồn tại
+    notFound();
   }
 
   return (
@@ -46,7 +46,7 @@ export default async function RootLayout(props: {
       <head>
         <InitColorSchemeScript attribute="class" />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProviderClient>
             <AppProvider>

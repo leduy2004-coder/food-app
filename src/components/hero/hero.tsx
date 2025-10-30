@@ -1,9 +1,29 @@
-"use client"
+"use client";
+
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "../image";
 
-const Hero = () => {
-  const t = useTranslations("HeroPage"); 
+export const Hero = () => {
+  const t = useTranslations("HeroPage");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <section className="relative bg-gradient-to-br from-purple-100 to-orange-100 py-16 px-4">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8 items-center min-h-[400px]">
+            {/* Loading skeleton */}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="relative bg-gradient-to-br from-purple-100 to-orange-100 py-16 px-4">
