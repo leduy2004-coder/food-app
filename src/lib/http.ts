@@ -1,6 +1,4 @@
 import envConfig from "@/config";
-import { getTokenExpiry, normalizePath } from "@/lib/utils";
-import { LoginResType } from "@/schemaValidations/auth.schema";
 import { redirect } from "next/navigation";
 
 type CustomOptions = Omit<RequestInit, "method" | "body"> & {
@@ -130,6 +128,7 @@ const request = async <Response>(
           });
           try {
             await clientLogoutRequest;
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
           } catch (error) {
           } finally {
             localStorage.removeItem("sessionToken");

@@ -60,7 +60,7 @@ const LoginForm = () => {
         roles: result.payload.result.roles,
       };
 
-      toast.success(result.payload.message);
+      toast.success("Đăng nhập thành công");
 
       setUser(userObj);
 

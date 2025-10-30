@@ -22,7 +22,7 @@ export default function ButtonLogout() {
     setLoading(true);
 
     try {
-      await authApiRequest.logoutFromNextClientToNextServer();
+      await authApiRequest.logoutFromNextClientToNextServer(true);
       router.push("/login");
     } catch (error) {
       handleErrorApi({ error });
@@ -41,7 +41,6 @@ export default function ButtonLogout() {
 
   return (
     <Button
-      variant="outlined"
       size="small"
       color="error"
       onClick={handleLogout}

@@ -29,8 +29,8 @@ export default function DeleteProduct({
 
   const handleDelete = async () => {
     try {
-      const result = await productApiRequest.delete(product.id);
-      toast.success(result.payload.message);
+      await productApiRequest.delete(product.id);
+      toast.success("Xóa sản phẩm thành công");
       setOpen(false);
       if (onDeleteSuccess) {
         onDeleteSuccess(product.id);

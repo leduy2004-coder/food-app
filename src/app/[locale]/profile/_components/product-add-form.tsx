@@ -73,7 +73,6 @@ const ProductAddForm = ({ product }: Props) => {
 
   // Reset form khi product thay đổi
   useEffect(() => {
-    console.log(product);
     if (product) {
       reset({
         name: product.name,
@@ -155,7 +154,6 @@ const ProductAddForm = ({ product }: Props) => {
       setLoading(false);
     }
   };
-  console.log("testtttt");
   return (
     <Box sx={{ maxWidth: 800, mx: "auto", p: 3 }}>
       <Paper elevation={2} sx={{ p: 4, borderRadius: 2 }}>

@@ -34,7 +34,7 @@ const authApiRequest = {
         },
       }
     ),
-  logoutFromNextClientToNextServer: (
+  logoutFromNextClientToNextServer: ( 
     force?: boolean | undefined,
     signal?: AbortSignal | undefined
   ) =>
