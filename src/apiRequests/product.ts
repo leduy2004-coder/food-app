@@ -3,7 +3,7 @@ import { MessageResType } from "@/schemaValidations/common.schema";
 import {
   CloudinaryListRes,
   CreateProductBodyType,
-  ProductListResType,
+  ProductPageListResType,
   ProductResApiType,
   ProductResType,
   UpdateProductBodyType,
@@ -11,11 +11,11 @@ import {
 } from "@/schemaValidations/product.schema";
 
 const productApiRequest = {
-  getListByUser: (userId: string) =>
-    http.get<ProductListResType>(
-      `/api/v1/product/get-products-by-user/${userId}`
+  getListByUser: (userId: string, page: number = 1, size: number = 10) =>
+    http.get<ProductPageListResType>(
+      `/api/v1/product/get-products-by-user/${userId}?page=${page}&size=${size}`
     ),
-  getDetailFromNextServerToServer: (productId: string, sessionToken: string) =>
+  getDetailFromNextServerToServer: (productId: string, sessionToken: string) => 
     http.get<ProductResApiType>(
       `/api/v1/product/${productId}`,
       {

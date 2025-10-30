@@ -1,49 +1,55 @@
-import React from "react";
+// components/simple-pagination.tsx
 
-type PaginationProps = {
-  page: number;
+"use client";
+
+import { Box, Pagination, Typography } from "@mui/material";
+
+type SimplePaginationProps = {
+  currentPage: number;
   totalPages: number;
-  onPageChange: (newPage: number) => void;
+  totalItems: number;
+  itemsPerPage: number;
+  onPageChange: (page: number) => void;
+  size?: "small" | "medium" | "large";
 };
 
-export const Pagination: React.FC<PaginationProps> = ({
-  page,
+export default function SimplePagination({
+  currentPage,
   totalPages,
+  totalItems,
+  itemsPerPage,
   onPageChange,
-}) => {
+  size = "medium",
+}: SimplePaginationProps) {
   if (totalPages <= 1) return null;
 
-  const handlePrev = () => {
-    if (page > 1) onPageChange(page - 1);
-  };
-
-  const handleNext = () => {
-    if (page < totalPages) onPageChange(page + 1);
-  };
+  const startItem = (currentPage - 1) * itemsPerPage + 1;
+  const endItem = Math.min(currentPage * itemsPerPage, totalItems);
 
   return (
-    <div className="mt-6 flex items-center justify-center gap-4">
-      <button
-        onClick={handlePrev}
-        disabled={page === 1}
-        className="rounded-lg bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 disabled:opacity-50"
-      >
-        ← Trước
-      </button>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      gap={2}
+      mt={4}
+    >
+      <Pagination
+        count={totalPages}
+        page={currentPage}
+        onChange={(_, value) => {
+          onPageChange(value);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+        color="primary"
+        size={size}
+        showFirstButton
+        showLastButton
+      />
 
-      <span className="text-gray-700">
-        Trang <strong>{page}</strong> / {totalPages}
-      </span>
-
-      <button
-        onClick={handleNext}
-        disabled={page === totalPages}
-        className="rounded-lg bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 disabled:opacity-50"
-      >
-        Sau →
-      </button>
-    </div>
+      <Typography variant="body2" color="text.secondary">
+        {startItem}-{endItem} / {totalItems}
+      </Typography>
+    </Box>
   );
-};
-
-export default Pagination;
+}
