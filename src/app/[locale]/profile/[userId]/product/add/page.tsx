@@ -5,5 +5,5 @@ export default function ProductAddPage() {
     <div>
       <ProductAddForm />
     </div>
-  )
+  );
 }

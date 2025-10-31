@@ -4,6 +4,7 @@ import { type ClassValue, clsx } from "clsx";
 import { UseFormSetError, FieldValues, FieldPath } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
 import jwt from "jsonwebtoken";
+import slugify from "slugify";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -11,7 +12,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export const handleErrorApi = <T extends FieldValues>({
   error,
-  setError, 
+  setError,
   duration,
 }: {
   error: Error | EntityError | unknown;
@@ -52,4 +53,9 @@ export const decodeJWT = <Payload = Record<string, unknown>>(token: string) => {
 export const getTokenExpiry = (token: string): number | null => {
   const decoded = decodeJWT<{ exp?: number }>(token);
   return decoded?.exp ? decoded.exp * 1000 : null;
+};
+
+export const convertSlugUrl = (text: string) => {
+  if (!text) return "";
+  return slugify(text, { lower: true, strict: true, locale: "vi" });
 };

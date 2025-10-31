@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import ModeSwitch from "@/components/features/mode-switch";
 import ButtonLogout from "@/components/features/button-logout";
+import { convertSlugUrl } from "@/lib/utils";
 
 const TopHeader = ({ locale }: { locale: string }) => {
   const t = useTranslations("Header");
@@ -95,7 +96,7 @@ const TopHeader = ({ locale }: { locale: string }) => {
                 {user ? (
                   <>
                     <Link
-                      href={`/profile/${user.id}`}
+                      href={`/profile/${convertSlugUrl(user?.nickName || "")}-${user?.id}.html`}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       {t("profile")}

@@ -26,6 +26,7 @@ import categoryApiRequest from "@/apiRequests/category";
 import { CategoryItemType } from "@/schemaValidations/category.schema";
 import { useAppContext as UserAuth } from "@/app/[locale]/app-provider";
 import Image from "@/components/image";
+import { convertSlugUrl } from "@/lib/utils";
 
 type Props = {
   product?: ProductResType;
@@ -142,7 +143,9 @@ const ProductAddForm = ({ product }: Props) => {
         toast.success("Thêm sản phẩm thành công!");
       }
 
-      router.push(`/profile/${user?.id}`);
+      router.push(
+        `/profile/${convertSlugUrl(user?.nickName || "")}-${user?.id}.html`
+      );
       router.refresh();
     } catch (error) {
       console.error(error);
