@@ -46,6 +46,7 @@
     "nickname": "Biệt danh",
     "email": "Email",
     "products": "Sản phẩm của bạn",
-    "heading": "Thông tin cá nhân"
+    "heading": "Thông tin cá nhân",
+    "userNotFoundMessage": "Hồ sơ người dùng bạn đang tìm kiếm không tồn tại."
   }
 }

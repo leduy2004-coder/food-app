@@ -45,6 +45,7 @@
     "notFound": "User information not found",
     "nickname": "Nickname",
     "email": "Email",
-    "heading": "User Profile"
+    "heading": "User Profile",
+    "userNotFoundMessage": "The user profile you are looking for does not exist."
   }
 }

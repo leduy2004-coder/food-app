@@ -57,5 +57,5 @@ export const getTokenExpiry = (token: string): number | null => {
 
 export const convertSlugUrl = (text: string) => {
   if (!text) return "";
-  return slugify(text, { lower: true, strict: true, locale: "vi" });
+  return slugify(text, { lower: true, locale: "vi" });
 };
